@@ -49,14 +49,14 @@ const Footer = ()=>{
                             </Typography>
 
 
-                    <Link ml={2} mt={2} variant="ContrastContent" href="#">
+                    <Link ml={2} mt={2} variant="ContrastContent" href="/sites">
                         Sites
                     </Link>
-                    <Link  ml={2} variant="ContrastContent" href="#">
+                    <Link  ml={2} variant="ContrastContent" href="/travelers">
                         Travelers
                     </Link>
-                    <Link  ml={2} variant="ContrastContent" href="#">
-                        Reservation
+                    <Link  ml={2} variant="ContrastContent" href="/reservations">
+                        Reservations
                     </Link>
 
                 </Box>
@@ -104,13 +104,13 @@ const Footer = ()=>{
                             </Typography>
 
 
-                    <Link ml={2} mt={2} variant="ContrastContent" textAlign="center" href="#">
+                    <Link ml={2} mt={2} variant="ContrastContent" textAlign="center" href="/sites">
                         Sites
                     </Link>
-                    <Link  ml={2} variant="ContrastContent" textAlign="center"  href="#">
+                    <Link  ml={2} variant="ContrastContent" textAlign="center"  href="/travelers">
                         Travelers
                     </Link>
-                    <Link  ml={2} variant="ContrastContent" textAlign="center" href="#">
+                    <Link  ml={2} variant="ContrastContent" textAlign="center" href="reservations">
                         Reservation
                     </Link>
 
@@ -138,7 +138,7 @@ const Footer = ()=>{
                 </Box>
             </Box>
         </Box>
-        <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column-reverse', height:'10vh'}}>
+        <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column-reverse', backgroundColor:'black',height:'10vh'}}>
             <Typography variant="ContrastLittle">©2022 Todos los derechos reservados</Typography>
         </Box>
         

@@ -46,7 +46,7 @@ const NavBar = ({page})=>{
                         {
                             pages.map(
                                 item =>(<Box sx={{m:2}}>
-                                            <Button  sx={{color:item === page ? 'red' :'inherit'}}variant="outlined" m={1} color="secondary">{item}</Button>
+                                            <Button  sx={{color:item === page ? 'red' :'inherit'}}variant="outlined" m={1} href={`/${item}`} color="secondary">{item}</Button>
                                         </Box>)
                             )
                         }

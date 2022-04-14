@@ -1,16 +1,20 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography ,useMediaQuery} from '@mui/material';
 import React from 'react';
 import { NavBar } from '../components/NavBar';
-import Image from '../assets/sunTrips.jpg'
 import { Footer } from '../components/Footer';
+import { Background1 } from '../components/Background1';
 
 const Welcome = ()=>{
-    return (
 
-        <Box sx={{ bgcolor: 'black', width:'100%'}} >
+
+    return (
+        <>
+       <Background1 />
+        
+        <Box sx={{ display:'flex',flexDirection:'column', flexWrap:'wrap', width:'100%'}} >
              <NavBar/>
              
-             <Box sx={{flexGrow:1, display:'flex', justifyContent:'center',backgroundRepeat:'no-repeat', alignItems:'center', height:'100vh',backgroundSize:'cover',  width:'100%', backgroundImage:`url(${Image})`}}>
+             <Box sx={{flexGrow:1, backgroundColor:'transparent',display:'flex', flexWrap:'wrap',justifyContent:'center', alignItems:'center',  width:'100%',minHeight:'100vh' }}>
                 
                 <Box>
                     <Typography>Hey jude</Typography>
@@ -18,7 +22,7 @@ const Welcome = ()=>{
             </Box>
             <Footer/>
         </Box>
-       
+       </>
     )
 }
 
