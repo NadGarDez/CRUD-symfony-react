@@ -34,6 +34,11 @@ const theme = createTheme(
         fontSize:15,
         fontFamily:'Montserrat'
       },
+      ContrastLittle: {
+        color: 'white',
+        fontSize:12,
+        fontFamily:'Montserrat'
+      },
       
     },
     palette: {
