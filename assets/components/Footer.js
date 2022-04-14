@@ -7,7 +7,7 @@ const Footer = ()=>{
     return (
         <>
         
-        <Box  sx={{boxShadow: 3,display:'flex',flexDirection:'column',zIndex:2,background: "linear-gradient(#54362c, #000);",flexWrap:'wrap', minHeight:'40vh'}}>
+        <Box  pt={2} sx={{boxShadow: 3,display:'flex',flexDirection:'column',zIndex:2,background: "linear-gradient(#54362c, #000);",flexWrap:'wrap', minHeight:'40vh'}}>
            <Box mt={3} pl={3} sx={{background: "linear-gradient(to right,#3d2719, #281406);", display:'flex', flexDirection:'row'}}>
                 <Box sx={{width:3/4, display:{xl:'flex',md:'flex', xs:'none', sm:'none'}}}>
                 <Typography variant="ContrastTittle" textAlign="justify">There's a big world out there</Typography>

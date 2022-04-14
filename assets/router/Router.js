@@ -34,6 +34,18 @@ const theme = createTheme(
         fontSize:15,
         fontFamily:'Montserrat'
       },
+      h1:{
+        color: '#ffd740',
+        fontWeight:'bold',
+        fontSize:100,
+        fontFamily:'roboto'
+      },
+      h1Mobile:{
+        color: '#ffd740',
+        fontWeight:'bold',
+        fontSize:60,
+        fontFamily:'roboto'
+      },
       ContrastLittle: {
         color: 'white',
         fontSize:12,
@@ -46,12 +58,15 @@ const theme = createTheme(
       primary: {
         main: '#ffd740',
       },
+
+      darkPrimary:{
+        main:"#df8d1c"
+      },
       secondary: {
-        main: '#e65100',
+        main: '#3d2719',
       },
-      background: {
-        default: '#fff8e1',
-      },
+    
+     
     }
   }
 )

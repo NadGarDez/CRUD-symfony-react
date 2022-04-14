@@ -29,7 +29,7 @@ const Background1 = ()=>{
     return (
         <>
         <Box sx={{height:'100vh', position: 'absolute',top:20,display:'flex', justifyContent:'center', alignItems:'center', overflow:'hidden',width:'100%'}}>
-            <img src={setImage()} style={{zIndex:5, position:'absolute', width:'100%', height:!big ? '100%': undefined }}/>
+            <img src={setImage()} style={{zIndex:5,position:'absolute', width:'100%', height:!medium? '100%': undefined }}/>
         </Box>
         </>
     )
