@@ -4,16 +4,17 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { Site } from "../pages/Site";
-import { Sites } from "../pages/Sites";
+import {  Trip } from "../pages/Trip";
+import { Trips } from "../pages/Trips";
 import { Travelers } from "../pages/Travelers";
 import { Reservations } from "../pages/Reservations";
 import { Welcome } from "../pages/Welcome";
 import { Reservation } from "../pages/Reservation";
 import { Traveler } from "../pages/Traveler";
-
+import { EditTrip } from "../pages/EditTrip";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
+import { CreateTrip } from "../pages/CreateTrip";
 
 
 const theme = createTheme(
@@ -77,8 +78,10 @@ const Router =()=>{
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<Welcome />}/>
-            <Route path="/sites" element={<Sites />}/>
-            <Route path="/site/:siteId" element={<Site/>}/>
+            <Route path="/trips" element={<Trips />}/>
+            <Route path="/trip/:tripId" element={<Trip/>}/>
+            <Route path="/createTrip" element={<CreateTrip/>}/>
+            <Route path="/editTrip/:idTrip" element={<EditTrip/>}/>
             <Route path="/travelers" element={<Travelers/>} />
             <Route path="traveler/:travelerId" element={<Traveler/>}/>
             <Route path="/reservations" element={<Reservations/>} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-const Site = ()=>{
+const Trip = ()=>{
     const {siteId} = useParams();
 
     return (
@@ -10,4 +10,4 @@ const Site = ()=>{
 }
 
 
-export {Site};
+export {Trip};
