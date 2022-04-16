@@ -48,7 +48,7 @@ $ yarn encore dev --watch # in other console instance
 ```
 
 ### DB Model
-![login](../githubImages/db.png)
+![login](/githubImages/db.png)
 
 
 
