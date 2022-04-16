@@ -54,17 +54,17 @@ $ yarn encore dev --watch # in other console instance
 
 ## Captures
 
-![login](../githubImages/captura1.png)
-![login](../githubImages/captura2.png)
-![login](../githubImages/captura3.png)
-![login](../githubImages/captura4.png)
-![login](../githubImages/captura5.png)
-![login](../githubImages/captura6.png)
-![login](../githubImages/captura7.png)
-![login](../githubImages/captura8.png)
-![login](../githubImages/captura9.png)
-![login](../githubImages/captura10.png)
-![login](../githubImages/captura11.png)
+![login](/githubImages/captura1.png)
+![login](/githubImages/captura2.png)
+![login](/githubImages/captura3.png)
+![login](/githubImages/captura4.png)
+![login](/githubImages/captura5.png)
+![login](/githubImages/captura6.png)
+![login](/githubImages/captura7.png)
+![login](/githubImages/captura8.png)
+![login](/githubImages/captura9.png)
+![login](/githubImages/captura10.png)
+![login](/githubImages/captura11.png)
 
 
 ## Environments
