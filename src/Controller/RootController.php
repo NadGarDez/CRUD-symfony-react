@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RootController extends AbstractController
 {
     /**
-     * @Route("/{reactRouting}/{param}", name="home", defaults={"reactRouting": null, "param": ""})
+     * @Route("/{reactRouting}/{param}", name="home",requirements={"reactRouting"="^(?!api).+"}, defaults={"reactRouting": null, "param": ""})
      */
     public function root(string $param): Response
     {

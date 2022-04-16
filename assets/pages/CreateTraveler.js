@@ -2,11 +2,9 @@ import React from 'react';
 import { NavBar } from '../components/NavBar';
 import { Footer } from '../components/Footer';
 import { TravelerForm } from './Forms';
-import { useNavigate } from "react-router-dom";
 import { Box } from '@mui/system';
 import { Paper, Toolbar, Typography } from '@mui/material';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
 
 
@@ -15,20 +13,24 @@ import { useParams } from 'react-router-dom';
 const CreateTraveler = ()=>{
 
    
-    const history = useNavigate()
 
     const createRequest = async (values, { setSubmitting })=>{
-        const result = await axios.post('/api/trip/edit',
-            {data: values}
-        )
+        let result;
+        try {
+            result = await axios.post('/api/createTraveler',{values})
+        
+        } catch (error) {
+            console.log(error)
+        }
+        
         setSubmitting(false);
-        console.log(result)
         if (result.status === 200) {
-            history.push("/trips");
+          window.history.back();
         } 
     }
 
-    
+
+
 
     return (
         <>
@@ -44,15 +46,17 @@ const CreateTraveler = ()=>{
                                     <Typography variant="h4">Create Traveler</Typography>
                                 </Box>
                                 <Box mt={2} sx={{display:'flex', flexDirection:'column',justifyContent:'center', alignItems:'center'}}>
-                                <TravelerForm initialValues={{}} 
+                                <TravelerForm initialValues={
+                                    {
+                                        ci: '',
+                                        name: '',
+                                        borthDay: '',
+                                        phone:''
+                                    }
+                                } 
                                             
                                             actionSubmit={
-                                                (values, { setSubmitting }) => {
-                                                    setTimeout(() => {
-                                                    alert(JSON.stringify(values, null, 2));
-                                                    setSubmitting(false);
-                                                    }, 400);
-                                                }
+                                                createRequest
                                             }
                                         />
                                 </Box>

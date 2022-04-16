@@ -49,7 +49,7 @@ const Footer = ()=>{
                             </Typography>
 
 
-                    <Link ml={2} mt={2} variant="ContrastContent" href="/sites">
+                    <Link ml={2} mt={2} variant="ContrastContent" href="/trips">
                         Sites
                     </Link>
                     <Link  ml={2} variant="ContrastContent" href="/travelers">
@@ -68,7 +68,7 @@ const Footer = ()=>{
                             @NadGarDez , Web and Mobile Fullstack Developer
                         </Typography>
                         <Typography mt={1} variant="ContrastContent" align="right">
-                            14/04/2022. Calabozo Edo Guarico Venezuela
+                            16/04/2022. Calabozo Edo Guarico Venezuela
                         </Typography>
                         <Box mt={1} sx={{display:'flex',flexDirection:'row-reverse'}}>
                             <GitHub sx={{margin:0.5}} color="primary" />
@@ -104,7 +104,7 @@ const Footer = ()=>{
                             </Typography>
 
 
-                    <Link ml={2} mt={2} variant="ContrastContent" textAlign="center" href="/sites">
+                    <Link ml={2} mt={2} variant="ContrastContent" textAlign="center" href="/trips">
                         Sites
                     </Link>
                     <Link  ml={2} variant="ContrastContent" textAlign="center"  href="/travelers">

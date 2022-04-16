@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 const NavBar = ({page})=>{
 
     const [openDrawer, setOpenDrawer] = useState(false);
-    const pages = ['sites', 'reservations', 'travelers'];
+    const pages = ['trips', 'reservations', 'travelers'];
     return(
         <>
         <Drawer

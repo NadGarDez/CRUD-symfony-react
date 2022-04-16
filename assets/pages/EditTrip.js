@@ -25,7 +25,6 @@ const EditTrip = ()=>{
         async ()=>{
             const result = await fetchTrip()
 
-            console.log(result)
             if (result !== null) {
                 setInitialValues(result)
             }
@@ -38,17 +37,16 @@ const EditTrip = ()=>{
 
     const fetchTrip = async ()=>{
         const result = await axios.get(`/api/trip/${idTrip}`);
-        return result.status===200 ? result.data : null
+        return result.status===200 ? JSON.parse(result.data) : null
     }
 
     const editRequest = async (values, { setSubmitting })=>{
-        const result = await axios.post('/api/trip/edit',
-            {data: values}
+        const result = await axios.post(`/api/editTrip/${idTrip}`,
+            {values}
         )
         setSubmitting(false);
-        console.log(result)
         if (result.status === 200) {
-            history.push("/trips");
+            window.history.back()
         } 
     }
 
@@ -73,12 +71,7 @@ const EditTrip = ()=>{
                                                 <TripForm initialValues={initialValues} 
                                             
                                                     actionSubmit={
-                                                        (values, { setSubmitting }) => {
-                                                            setTimeout(() => {
-                                                            alert(JSON.stringify(values, null, 2));
-                                                            setSubmitting(false);
-                                                            }, 400);
-                                                        }
+                                                        editRequest
                                                     }
                                                 />
                                            ):

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { NavBar } from '../components/NavBar';
 import { Footer } from '../components/Footer';
 import { ReservationForm } from './Forms';
@@ -14,17 +14,51 @@ import { useParams } from 'react-router-dom';
 
 const CreateReservation = ()=>{
 
-   
-    const history = useNavigate()
+    const [trips,setTrips] = useState(null);
+    const [travelers,setTravelers] = useState(null);
+
+    useEffect(
+        ()=>{
+            const fetchTrips = async ()=>{
+                let result;
+                try {
+                    result = await axios.get('/api/tripAvailable');
+                    setTrips(result.status===200 ? JSON.parse(result.data) : null)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            const fetchNames =  async()=>{
+                let result;
+                try {
+                    result = await axios.get('/api/names');
+                    setTravelers(result.status===200 ? JSON.parse(result.data) : null)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+
+            fetchTrips();
+            fetchNames()
+
+        },
+        []
+    )
+
 
     const createRequest = async (values, { setSubmitting })=>{
-        const result = await axios.post('/api/trip/edit',
-            {data: values}
-        )
+        let result;
+        try {
+         result = await axios.post('/api/createReservation',{values})
+        }
+        catch (error) {
+
+            console.log(error)
+        }
+        
         setSubmitting(false);
-        console.log(result)
         if (result.status === 200) {
-            history.push("/trips");
+            window.history.back();
         } 
     }
 
@@ -44,15 +78,10 @@ const CreateReservation = ()=>{
                                     <Typography variant="h4">Create Reservation</Typography>
                                 </Box>
                                 <Box mt={2} sx={{display:'flex', flexDirection:'column',justifyContent:'center', alignItems:'center'}}>
-                                <ReservationForm initialValues={{a:'a'}} 
+                                <ReservationForm trips={trips} travelers={travelers} initialValues={{}} 
                                             
                                             actionSubmit={
-                                                (values, { setSubmitting }) => {
-                                                    setTimeout(() => {
-                                                    alert(JSON.stringify(values, null, 2));
-                                                    setSubmitting(false);
-                                                    }, 400);
-                                                }
+                                                createRequest
                                             }
                                         />
                                 </Box>

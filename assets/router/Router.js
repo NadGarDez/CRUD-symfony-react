@@ -4,13 +4,10 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import {  Trip } from "../pages/Trip";
 import { Trips } from "../pages/Trips";
 import { Travelers } from "../pages/Travelers";
 import { Reservations } from "../pages/Reservations";
 import { Welcome } from "../pages/Welcome";
-import { Reservation } from "../pages/Reservation";
-import { Traveler } from "../pages/Traveler";
 import { EditTrip } from "../pages/EditTrip";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
@@ -18,7 +15,6 @@ import { CreateTrip } from "../pages/CreateTrip";
 import { CreateTraveler } from "../pages/CreateTraveler";
 import { EditTraveler } from "../pages/EditTraveler";
 import { CreateReservation } from "../pages/CreateReservation";
-import { EditReservation } from "../pages/EditReservation";
 
 
 const theme = createTheme(
@@ -83,17 +79,13 @@ const Router =()=>{
         <Routes>
             <Route path="/" element={<Welcome />}/>
             <Route path="/trips" element={<Trips />}/>
-            <Route path="/trip/:tripId" element={<Trip/>}/>
             <Route path="/createTrip" element={<CreateTrip/>}/>
             <Route path="/editTrip/:idTrip" element={<EditTrip/>}/>
             <Route path="/travelers" element={<Travelers/>} />
-            <Route path="traveler/:travelerId" element={<Traveler/>}/>
             <Route path="/createTraveler" element={<CreateTraveler/>}/>
             <Route path="/editTraveler/:idTraveler" element={<EditTraveler/>}/>
             <Route path="/reservations" element={<Reservations/>} />
-            <Route path="/reservation/:reservationId" element={<Reservation/>}/>
             <Route path="/createReservation" element={<CreateReservation/>}/>
-            <Route path="/editReservation/:reservationId" element={<EditReservation/>}/>
         </Routes>
     </BrowserRouter>
   </ThemeProvider>

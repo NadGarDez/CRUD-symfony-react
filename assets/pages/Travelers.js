@@ -13,27 +13,51 @@ import {Edit, Delete} from '@mui/icons-material';
 
 const Travelers = ()=>{
 
-    const [trips,setTrips] = useState(null);
+    const [travelers,setTravelers] = useState(null);
 
-    /*
+    
     useEffect(
-        async ()=>{
-            try {
-                const fetchedLocations = await fetchTravelers();
-                console.log(fetchedLocations);
-                setTrips([...fetchedLocations])
-            } catch (error) {
-                console.log(error)
-            }            
+          ()=>{
+            (async ()=>{
+                let result;
+                try {
+                    result = await axios.get('/api/travelers');
+                    
+                } catch (error) {
+                    console.log(error)
+                }
+               
+                setTravelers(result.status===200 ? JSON.parse(result.data) : null)
+            })()
+            //fetchTravelers()
         },
         []
     )
 
-
-*/
+    
     const fetchTravelers = async ()=>{
-        const result = await axios.get('/api/trips');
-        return result.status===200 ? result.data.trips : []
+        let result;
+        try {
+            result = await axios.get('/api/travelers');
+            
+        } catch (error) {
+            console.log(error)
+        }
+       
+        setTravelers(result.status===200 ? JSON.parse(result.data) : null)
+    }
+
+    const deleteTraveler = async (id)=>{
+        let result;
+        try {
+            result = await axios.delete(`/api/deleteTraveler/${id}`);
+            if (result.status === 200) {
+              fetchTravelers() 
+              
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -51,7 +75,7 @@ const Travelers = ()=>{
                                     <Typography variant="h4">Travelers List</Typography>
                                 </Box>
                                 <Box sx={{width:'50%', display:'flex', flexDirection:'row-reverse'}}>
-                                    <Button variant="outlined" href="/createTrip" color="secondary" endIcon={<AddCircleOutline/>}>
+                                    <Button variant="outlined" href="/createTraveler" color="secondary" endIcon={<AddCircleOutline/>}>
                                         Add Traveler
                                     </Button>
                                 </Box>
@@ -63,7 +87,7 @@ const Travelers = ()=>{
                                         <TableCell style={{fontSize:20}}>ID</TableCell>
                                         <TableCell style={{fontSize:20}}>CI</TableCell>
                                         <TableCell style={{fontSize:20}}>Name</TableCell>
-                                        <TableCell style={{fontSize:20}}>Born Date</TableCell>
+                                        <TableCell style={{fontSize:20}}>Birth Date</TableCell>
                                         <TableCell style={{fontSize:20}}>Phone Number</TableCell>
                                         <TableCell style={{fontSize:20}}>ActFions</TableCell>
                                     </TableRow>
@@ -71,19 +95,19 @@ const Travelers = ()=>{
                                 <TableBody>
 
                                 {
-                                    trips !== null && trips.map(
-                                        item => {
+                                    (travelers !== null && Array.isArray(travelers)) && travelers.map(
+                                        (item, index) => {
                                             return(
-                                                <TableRow >
+                                                <TableRow key={index}>
                                                     <TableCell>{item.id}</TableCell>
-                                                    <TableCell>{item.placesNumber}</TableCell>
-                                                    <TableCell>{item.destination}</TableCell>
-                                                    <TableCell>{item.origin}</TableCell>
-                                                    <TableCell>{item.price}</TableCell>
+                                                    <TableCell>{item.ci}</TableCell>
+                                                    <TableCell>{item.name}</TableCell>
+                                                    <TableCell>{item.birth_date}</TableCell>
+                                                    <TableCell>{item.phone_number}</TableCell>
                                                     <TableCell>
                                                       <Tooltip title="Edit">
                                                         <IconButton color="primary" name="edit"
-                                                            href={`/editTrip/${item.id}`}
+                                                            href={`/editTraveler/${item.id}`}
                                                         >
 
                                                           <Edit/>
@@ -92,8 +116,8 @@ const Travelers = ()=>{
                                                       <Tooltip title="Delete">
                                                         <IconButton color="primary" name="edit"
                                                           onClick={
-                                                            ()=>{
-                                                              console.log(`delete ${item.id}`)
+                                                            async ()=>{
+                                                               deleteTraveler(item.id)
                                                             }
                                                           }
                                                         >

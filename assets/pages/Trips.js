@@ -16,23 +16,49 @@ const Trips = ()=>{
     const [trips,setTrips] = useState(null);
 
     useEffect(
-        async ()=>{
-            try {
-                const fetchedLocations = await fetchLocations();
-                console.log(fetchedLocations);
-                setTrips([...fetchedLocations])
-            } catch (error) {
-                console.log(error)
-            }            
+         ()=>{
+
+            (
+                async ()=>{
+                    let result = "";
+                    try {
+                        result = await axios.get('/api/trips');
+                    } catch (error) {
+                        console.log(error)
+                    }
+                    setTrips(result.status===200 ? JSON.parse(result.data) : null)
+                }
+            )()
+        
         },
         []
     )
 
 
 
-    const fetchLocations = async ()=>{
-        const result = await axios.get('/api/trips');
-        return result.status===200 ? result.data.trips : []
+    const fetchTrips = async ()=>{
+        let result;
+        try {
+            result = await axios.get('/api/trips');
+            
+        } catch (error) {
+            console.log(error)
+        }
+       
+        setTrips(result.status===200 ? JSON.parse(result.data) : null)
+    }
+
+    const deleteTrip = async (id)=>{
+        let result;
+        try {
+            result = await axios.delete(`/api/deleteTrip/${id}`);
+            if (result.status === 200) {
+                fetchTrips() 
+            }
+            console.log(result);
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -51,7 +77,7 @@ const Trips = ()=>{
                                 </Box>
                                 <Box sx={{width:'50%', display:'flex', flexDirection:'row-reverse'}}>
                                     <Button variant="outlined" href="/createTrip" color="secondary" endIcon={<AddCircleOutline/>}>
-                                        Add Site
+                                        Add Trip
                                     </Button>
                                 </Box>
                             </Box>
@@ -70,7 +96,7 @@ const Trips = ()=>{
                                 <TableBody>
 
                                 {
-                                    trips !== null && trips.map(
+                                    (trips !== null && Array.isArray(trips)) && trips.map(
                                         item => {
                                             return(
                                                 <TableRow >
@@ -92,7 +118,7 @@ const Trips = ()=>{
                                                         <IconButton color="primary" name="edit"
                                                           onClick={
                                                             ()=>{
-                                                              console.log(`delete ${item.id}`)
+                                                              deleteTrip(item.id)
                                                             }
                                                           }
                                                         >

@@ -11,28 +11,29 @@ import {Edit, Delete} from '@mui/icons-material';
 
 const Reservations = ()=>{
    
-    const [trips,setTrips] = useState(null);
+    const [reservations,setReservations] = useState(null);
 
-    /*
+    
     useEffect(
         async ()=>{
-            try {
-                const fetchedLocations = await fetchTravelers();
-                console.log(fetchedLocations);
-                setTrips([...fetchedLocations])
-            } catch (error) {
-                console.log(error)
-            }            
+            const fetchReservations = async ()=>{
+                let result;
+                try {
+                    result = await axios.get('/api/reservations');
+                } catch (error) {
+                    console.log(error);
+                }
+             
+                setReservations(result.status===200 ? JSON.parse(result.data) : null);
+            }
+            fetchReservations()
         },
         []
     )
 
 
-*/
-    const fetchTravelers = async ()=>{
-        const result = await axios.get('/api/trips');
-        return result.status===200 ? result.data.trips : []
-    }
+
+    console.log(reservations);
 
 
     return (
@@ -49,7 +50,7 @@ const Reservations = ()=>{
                                     <Typography variant="h4">Reservation List</Typography>
                                 </Box>
                                 <Box sx={{width:'50%', display:'flex', flexDirection:'row-reverse'}}>
-                                    <Button variant="outlined" href="/createTrip" color="secondary" endIcon={<AddCircleOutline/>}>
+                                    <Button variant="outlined" href="/createReservation" color="secondary" endIcon={<AddCircleOutline/>}>
                                         Add Reservation
                                     </Button>
                                 </Box>
@@ -59,20 +60,22 @@ const Reservations = ()=>{
                                 <TableHead>
                                     <TableRow>
                                         <TableCell style={{fontSize:20}}>ID</TableCell>
-                                        <TableCell style={{fontSize:20}}>Name</TableCell>
-                                        <TableCell style={{fontSize:20}}>Trip</TableCell>
+                                        <TableCell style={{fontSize:20}}>traveler Referencee</TableCell>
+                                        <TableCell style={{fontSize:20}}>Trip Reference</TableCell>
+                                        <TableCell style={{fontSize:20}}>Pay Referense</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
 
                                 {
-                                    trips !== null && trips.map(
+                                    (reservations !== null && Array.isArray(reservations)) && reservations.map(
                                         item => {
                                             return(
                                                 <TableRow >
                                                     <TableCell>{item.id}</TableCell>
                                                     <TableCell>{item.name}</TableCell>
-                                                    <TableCell>{item.trip}</TableCell>
+                                                    <TableCell>{item.destination}</TableCell>
+                                                    <TableCell>{item.pay_reference}</TableCell>
                                                 </TableRow >
                                             )
                                         }

@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { Box } from '@mui/system';
 import { Paper, Toolbar, Typography } from '@mui/material';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
 
 
@@ -15,19 +14,14 @@ import { useParams } from 'react-router-dom';
 const CreateTrip = ()=>{
 
    
-    const history = useNavigate()
-
-
-    
 
     const createRequest = async (values, { setSubmitting })=>{
-        const result = await axios.post('/api/trip/edit',
-            {data: values}
+        const result = await axios.post('/api/createTrip',
+            {values}
         )
         setSubmitting(false);
-        console.log(result)
         if (result.status === 200) {
-            history.push("/trips");
+            window.history.back()
         } 
     }
 
@@ -50,12 +44,7 @@ const CreateTrip = ()=>{
                                 <TripForm initialValues={{}} 
                                             
                                             actionSubmit={
-                                                (values, { setSubmitting }) => {
-                                                    setTimeout(() => {
-                                                    alert(JSON.stringify(values, null, 2));
-                                                    setSubmitting(false);
-                                                    }, 400);
-                                                }
+                                                createRequest
                                             }
                                         />
                                 </Box>

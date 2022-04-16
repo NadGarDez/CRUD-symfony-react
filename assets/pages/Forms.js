@@ -28,26 +28,22 @@ const schemaValidatorTraveler =Yup.object().shape({
       .min(7, 'Too Short!')
       .max(9, 'Too Long!')
       .required('Required'),
-    name: Yup.number()
-      .required('Required'),
-    borthDay: Yup.string()
-        .min(2, 'Too Short!')
+    name: Yup.string()
+        .min(3, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
-    phone:Yup.string()
-        .min(11, 'Too Long!')
+    birth_date: Yup.string()
+        .required('Required'),
+    phone_number:Yup.string()
+        .min(11, 'Too Short!')
         .max(15, 'Too Long!')
         .required('Required'),
     })
 
 const schemaValidatorReservation =Yup.object().shape({
     travelerId: Yup.string()
-        .min(1, 'Too Short!')
-        .max(9, 'Too Long!')
         .required('Required'),
     tripId: Yup.string()
-        .min(1, 'Too Short!')
-        .max(9, 'Too Long!')
         .required('Required'),
             
     payReference: Yup.string()
@@ -74,55 +70,68 @@ const TripForm = ({initialValues,actionSubmit})=>{
     return (
         <>
         
-            <BasicForm initial={initialValues} actionSubmit={actionSubmit} validator={schemaValidatorTraveler}>
+            <BasicForm initial={initialValues} actionSubmit={actionSubmit} validator={schemaValidatorTrip}>
                 {
                     ({values,errors,handleChange,handleBlur,handleSubmit,isSubmitting}) =>{
-                        console.log(values)
                         return (
                         <form onSubmit={handleSubmit}>
                             <Box sx={{display:'flex', flexDirection:'column'}}>
                                 
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}> 
                                     <TextField
+                                    sx={{width:'100%'}}
                                         placeholder='Destination'
                                         mb={2}
                                         variant="outlined"
+                                        name="destination"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.destination ?? ''}
+                                        error={Boolean(errors.destination)}
+                                        helperText={errors.destination}
                                     />
-                                    {errors.email && touched.email && errors.email}
                                 </Box>
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}>
                                     <TextField
+                                    sx={{width:'100%'}}
                                         placeholder='Places Number'
                                         variant="outlined"
+                                        name="placesNumber"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.placesNumber ?? ''}
+                                        error={Boolean(errors.placesNumber)}
+                                        helperText={errors.placesNumber}
                                     />
-                                    {errors.password && touched.password && errors.password}
                                 </Box>
 
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}>
 
                                     <TextField
+                                    sx={{width:'100%'}}
                                          placeholder='Origin'
                                         variant="outlined"
+                                        name="origin"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.origin ?? ''}
+                                        error={Boolean(errors.origin)}
+                                        helperText={errors.origin}
                                     />
 
                                 </Box>
 
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}>
                                     <TextField
+                                    sx={{width:'100%'}}
                                          placeholder='Prices'
                                         variant="outlined"
+                                        name="price"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.price ?? ''}
+                                        error={Boolean(errors.price)}
+                                        helperText={errors.price}
                                     />
                                 </Box>
 
@@ -154,56 +163,69 @@ const TravelerForm = ({initialValues,actionSubmit})=>{
     return (
         <>
         
-            <BasicForm initial={initialValues} actionSubmit={actionSubmit} validator={schemaValidatorTrip}>
+            <BasicForm initial={initialValues} actionSubmit={actionSubmit} validator={schemaValidatorTraveler}>
                 {
                     ({values,errors,handleChange,handleBlur,handleSubmit,isSubmitting}) =>{
-                        console.log(values)
                         return (
                         <form onSubmit={handleSubmit}>
                             <Box sx={{display:'flex', flexDirection:'column'}}>
                                 
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}>
                                     <TextField
+                                    sx={{width:'100%'}}
+                                        name="ci"
                                         placeholder='CI'
                                         mb={2}
                                         variant="outlined"
                                         onChange={handleChange}
+                                        helperText={errors.ci}
+                                        error={Boolean(errors.ci)}
                                         onBlur={handleBlur}
                                         value={values.ci ?? ''}
                                     />
-                                    {errors.email && touched.email && errors.email}
                                 </Box>
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}>
                                     <TextField
+                                    sx={{width:'100%'}}
                                         placeholder='Name'
+                                        name="name"
                                         variant="outlined"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.name ?? ''}
+                                        error={Boolean(errors.name)}
+                                        helperText={errors.name}
                                     />
-                                    {errors.password && touched.password && errors.password}
                                 </Box>
 
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}>
 
                                     <TextField
+                                    sx={{width:'100%'}}
                                          placeholder='Birthday'
                                          type="date"
+                                         name="birth_date"
                                         variant="outlined"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.origin ?? ''}
+                                        value={values.birth_date ?? ''}
+                                        error={Boolean(errors.birth_date)}
+                                        helperText={errors.birth_date}
                                     />
 
                                 </Box>
 
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}>
                                     <TextField
+                                    sx={{width:'100%'}}
                                          placeholder='Phone Number'
                                         variant="outlined"
+                                        name="phone_number"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.price ?? ''}
+                                        value={values.phone_number ?? ''}
+                                        error={Boolean(errors.phone_number)}
+                                        helperText={errors.phone_number}
                                     />
                                 </Box>
 
@@ -225,7 +247,7 @@ const TravelerForm = ({initialValues,actionSubmit})=>{
 }
 
 
-const ReservationForm = ({initialValues, actionSubmit, edit})=>{
+const ReservationForm = ({initialValues, actionSubmit, edit, trips,travelers})=>{
     return (
         <>
         
@@ -236,44 +258,73 @@ const ReservationForm = ({initialValues, actionSubmit, edit})=>{
                         <form onSubmit={handleSubmit}>
                             <Box sx={{display:'flex', flexDirection:'column'}}>
                                 
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}>
                                     <Select
+                                        sx={{width:'100%'}}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         disabled={edit}
+                                        defaultValue="none"
+                                        name="travelerId"
                                         placeholder="Traveler"
-                                        value={1}
+                                        value={values.traveler}
+                                        error={Boolean(errors.travelerId)}
+                                        helperText={errors.travelerId}
                                     >
-                                        <MenuItem value=""><em>None</em></MenuItem>
-                                        <MenuItem value={1}>Pedro</MenuItem>
-                                        <MenuItem value={2}>Lorena</MenuItem>
-                                        <MenuItem value={3}>Sam</MenuItem>
+                                        <MenuItem value="none" disabled>
+                                            Traveler
+                                        </MenuItem>
+                                        {
+                                            (travelers!==null && Array.isArray(travelers)) && travelers.map(
+                                                item=>{
+                                                    return (
+                                                        <MenuItem value={item.id}>{item.name}</MenuItem>
+                                                    )
+                                            }
+                                            )
+                                        }
+
                                     </Select>
-                                    {errors.email && touched.email && errors.email}
                                 </Box>
-                                <Box m={1}>
+                                <Box m={1}  sx={{width:350}}>
                                     <Select
+                                    sx={{width:'100%'}}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         disabled={edit}
+                                        defaultValue="none"
                                         placeholder="Trip"
-                                        value={1}
+                                        name="tripId"
+                                        value={values.trips}
+                                        error={Boolean(errors.tripId)}
+                                        helperText={errors.tripId}
                                     >
-                                        <MenuItem value=""><em>None</em></MenuItem>
-                                        <MenuItem value={1}>Calabozo</MenuItem>
-                                        <MenuItem value={2}>San Juan</MenuItem>
-                                        <MenuItem value={3}>Valle De La Pascua</MenuItem>
+                                        <MenuItem value="none" disabled>
+                                            Trip
+                                        </MenuItem>
+                                       {
+                                            (trips!==null && Array.isArray(trips)) && trips.map(
+                                                item=>{
+                                                    return (
+                                                        <MenuItem value={item.id}>{item.destination}</MenuItem>
+                                                    )
+                                            }
+                                            )
+                                        }
                                     </Select>
-                                    {errors.email && touched.email && errors.email}
                                 </Box>
                              
-                                <Box m={1}>
+                                <Box m={1} sx={{width:350}}>
                                     <TextField
+                                    sx={{width:'100%'}}
                                          placeholder='Pay Reference'
+                                         name="payReference"
                                         variant="outlined"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.price ?? ''}
+                                        value={values.payReference ?? ''}
+                                        error={Boolean(errors.payReference)}
+                                        helperText={errors.payReference}
                                     />
                                 </Box>
 
@@ -282,14 +333,6 @@ const ReservationForm = ({initialValues, actionSubmit, edit})=>{
                                         Submit
                                     </Button>
                                 </Box>
-
-                                
-                                
-                                
-                                
-                                
-                                
-                            
                             </Box>
                             
                         </form>
@@ -301,11 +344,6 @@ const ReservationForm = ({initialValues, actionSubmit, edit})=>{
 }
 
 
-const CreateReservationForm = ()=>{
-    return (
-        <p>hey</p>
-    )
-}
 
 
 export {TripForm,TravelerForm,ReservationForm};
