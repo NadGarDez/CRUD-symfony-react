@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { NavBar } from '../components/NavBar';
 import { Footer } from '../components/Footer';
-
-import { useHistory } from "react-router-dom";
-import {AddCircleOutline} from '@mui/icons-material';
+import { TripForm } from './Forms';
+import { useNavigate } from "react-router-dom";
 import { Box } from '@mui/system';
-import { Button, Paper, Table,Tooltip,IconButton, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar, Typography } from '@mui/material';
+import { Paper, Table,Tooltip,IconButton, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar, Typography } from '@mui/material';
 import axios from 'axios';
-import {Edit, Delete} from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 
 
@@ -18,36 +16,40 @@ const EditTrip = ()=>{
 
     const [trip,setTrip] = useState(null);
     const {idTrip} = useParams()
-    console.log(idTrip);
-    const history = useHistory()
+    const history = useNavigate()
 
-    const [form,setForm] = useState(
-        {
-                'destination':'',
-                'placesNumber':0,
-                'origin':'',
-                'price':''
-        }
-    )
+
+    const [initialValues,setInitialValues] = useState(null)
  
+    useEffect(
+        async ()=>{
+            const result = await fetchTrip()
+
+            console.log(result)
+            if (result !== null) {
+                setInitialValues(result)
+            }
+        },
+        []
+
+    )
     
+   
 
-
-    const fetchLocations = async ()=>{
+    const fetchTrip = async ()=>{
         const result = await axios.get(`/api/trip/${idTrip}`);
-        return result.status===200 ? result.data.trips : null
+        return result.status===200 ? result.data : null
     }
 
-    const editRequest = async ()=>{
+    const editRequest = async (values, { setSubmitting })=>{
         const result = await axios.post('/api/trip/edit',
-        {data: form}
+            {data: values}
         )
+        setSubmitting(false);
         console.log(result)
         if (result.status === 200) {
             history.push("/trips");
-        } else {
-            
-        }
+        } 
     }
 
     
@@ -58,13 +60,35 @@ const EditTrip = ()=>{
                 <NavBar />
                 <Toolbar/>
                 <Box sx={{backgroundColor:'#F7E2C3', flexDirection:'row',display:'flex',width:'100%',height:'70vh' }}>
-                    <Box p={3} sx={{width:'100%', height:'100%', display:'flex', justifyContent:'center'}}>
-                        <Paper m={3} p={2} sx={{padding:6,width:'50%', height:'80%'}}>
+                    <Box p={3} sx={{width:'100%', flexWrap:'wrap', display:'flex', justifyContent:'center'}}>
+                        <Paper m={3} p={2} sx={{padding:6,width:'50%',justifyContent:'center',alignItems:'center', display:'flex', flexWrap:'wrap'}}>
                             
-                            <Box sx={{display:'flex', flexDirection:'row'}}>
-                                <Box sx={{width:'50%', display:'flex'}}>
+                            <Box sx={{display:'flex', flexDirection:'column'}}>
+                                <Box sx={{width:'100%', display:'flex', justifyContent:'center'}}>
                                     <Typography variant="h4">Edit Trip</Typography>
                                 </Box>
+                                <Box mt={2} sx={{display:'flex', flexDirection:'column',justifyContent:'center', alignItems:'center'}}>
+                                       {
+                                           initialValues!== null ? (
+                                                <TripForm initialValues={initialValues} 
+                                            
+                                                    actionSubmit={
+                                                        (values, { setSubmitting }) => {
+                                                            setTimeout(() => {
+                                                            alert(JSON.stringify(values, null, 2));
+                                                            setSubmitting(false);
+                                                            }, 400);
+                                                        }
+                                                    }
+                                                />
+                                           ):
+                                           (
+                                               <Typography>Loading...</Typography>
+                                           )
+                                       }
+                                </Box>
+
+                                
                                 
                             </Box>
                             

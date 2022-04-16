@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavBar } from '../components/NavBar';
 import { Footer } from '../components/Footer';
-import { TripForm } from './Forms';
+import { ReservationForm } from './Forms';
 import { useNavigate } from "react-router-dom";
 import { Box } from '@mui/system';
 import { Paper, Toolbar, Typography } from '@mui/material';
@@ -12,13 +12,10 @@ import { useParams } from 'react-router-dom';
 
 
 
-const CreateTrip = ()=>{
+const CreateReservation = ()=>{
 
    
     const history = useNavigate()
-
-
-    
 
     const createRequest = async (values, { setSubmitting })=>{
         const result = await axios.post('/api/trip/edit',
@@ -44,10 +41,10 @@ const CreateTrip = ()=>{
                             
                             <Box sx={{display:'flex', flexDirection:'column'}}>
                                 <Box sx={{width:'100%', display:'flex', justifyContent:'center'}}>
-                                    <Typography variant="h4">Create Trip</Typography>
+                                    <Typography variant="h4">Create Reservation</Typography>
                                 </Box>
                                 <Box mt={2} sx={{display:'flex', flexDirection:'column',justifyContent:'center', alignItems:'center'}}>
-                                <TripForm initialValues={{}} 
+                                <ReservationForm initialValues={{a:'a'}} 
                                             
                                             actionSubmit={
                                                 (values, { setSubmitting }) => {
@@ -77,6 +74,6 @@ const CreateTrip = ()=>{
 }
 
 
-export {CreateTrip};
+export {CreateReservation};
 
 

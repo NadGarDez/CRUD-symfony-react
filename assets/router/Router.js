@@ -15,6 +15,10 @@ import { EditTrip } from "../pages/EditTrip";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import { CreateTrip } from "../pages/CreateTrip";
+import { CreateTraveler } from "../pages/CreateTraveler";
+import { EditTraveler } from "../pages/EditTraveler";
+import { CreateReservation } from "../pages/CreateReservation";
+import { EditReservation } from "../pages/EditReservation";
 
 
 const theme = createTheme(
@@ -84,8 +88,12 @@ const Router =()=>{
             <Route path="/editTrip/:idTrip" element={<EditTrip/>}/>
             <Route path="/travelers" element={<Travelers/>} />
             <Route path="traveler/:travelerId" element={<Traveler/>}/>
+            <Route path="/createTraveler" element={<CreateTraveler/>}/>
+            <Route path="/editTraveler/:idTraveler" element={<EditTraveler/>}/>
             <Route path="/reservations" element={<Reservations/>} />
             <Route path="/reservation/:reservationId" element={<Reservation/>}/>
+            <Route path="/createReservation" element={<CreateReservation/>}/>
+            <Route path="/editReservation/:reservationId" element={<EditReservation/>}/>
         </Routes>
     </BrowserRouter>
   </ThemeProvider>
